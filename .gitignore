@@ -16,3 +16,5 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+_Resharper.*/
+dotnet/videostore/packages/
