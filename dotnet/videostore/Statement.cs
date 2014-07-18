@@ -37,15 +37,13 @@ namespace videostore
             foreach (var rental in rentals)
             {
                 result += "\t"
-                       + rental.GetMovie().GetTitle() + "\t"
+                       + rental.GetTitle() + "\t"
                        + string.Format("{0:F1}", rental.AmountFor()) + "\n";
-
             }
 
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
             result += "You earned " + FrequentRenterPoints + " frequent renter points\n";
             return result;
         }
-
     }
 }

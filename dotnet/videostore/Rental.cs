@@ -21,6 +21,11 @@
             return movie;
         }
 
+        public string GetTitle()
+        {
+            return movie.GetTitle();
+        }
+
         public double AmountFor()
         {
             double amount = 0;
