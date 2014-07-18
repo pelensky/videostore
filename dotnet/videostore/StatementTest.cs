@@ -79,7 +79,7 @@
 
         private static Movie CreateRegularMovie(string name = "Regular Movie")
         {
-            return new Movie(name, Movie.REGULAR);
+            return new RegularMovie(name, Movie.REGULAR);
         }
     }
 }

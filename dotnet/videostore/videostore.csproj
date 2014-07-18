@@ -37,6 +37,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RegularMovie.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

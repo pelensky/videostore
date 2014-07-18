@@ -26,17 +26,12 @@
             return title;
         }
 
-        public double Price(int daysRented)
+        public virtual double Price(int daysRented)
         {
             var price = 0.0;
             switch (GetPriceCode())
             {
-                case REGULAR:
-                    price += 2;
-                    if (daysRented > 2)
-                        price += (daysRented - 2) * 1.5;
-                    break;
-                case NEW_RELEASE:
+               case NEW_RELEASE:
                     price += daysRented * 3;
                     break;
                 case CHILDRENS:
