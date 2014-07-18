@@ -31,7 +31,7 @@ namespace videostore
             
             foreach (var rental in rentals)
             {
-                var thisAmount = AmountFor(rental);
+                var thisAmount = Rental.AmountFor(rental);
 
                 FrequentRenterPoints++;
 
@@ -46,29 +46,6 @@ namespace videostore
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
             result += "You earned " + FrequentRenterPoints + " frequent renter points\n";
             return result;
-        }
-
-        private static double AmountFor(Rental rental)
-        {
-            double amount = 0;
-
-            switch (rental.GetMovie().GetPriceCode())
-            {
-                case Movie.REGULAR:
-                    amount += 2;
-                    if (rental.GetDaysRented() > 2)
-                        amount += (rental.GetDaysRented() - 2)*1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    amount += rental.GetDaysRented()*3;
-                    break;
-                case Movie.CHILDRENS:
-                    amount += 1.5;
-                    if (rental.GetDaysRented() > 3)
-                        amount += (rental.GetDaysRented() - 3)*1.5;
-                    break;
-            }
-            return amount;
         }
     }
 }
