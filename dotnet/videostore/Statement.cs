@@ -29,26 +29,9 @@ namespace videostore
 
             while (rentalsEnumerator.MoveNext())
             {
-                double thisAmount = 0;
-                Rental each = (Rental) rentalsEnumerator.Current;
+                var each = (Rental) rentalsEnumerator.Current;
 
-                // determines the amount for each line
-                switch (each.GetMovie().GetPriceCode())
-                {
-                    case Movie.REGULAR:
-                        thisAmount += 2;
-                        if (each.GetDaysRented() > 2)
-                            thisAmount += (each.GetDaysRented() - 2) * 1.5;
-                        break;
-                    case Movie.NEW_RELEASE:
-                        thisAmount += each.GetDaysRented() * 3;
-                        break;
-                    case Movie.CHILDRENS:
-                        thisAmount += 1.5;
-                        if (each.GetDaysRented() > 3)
-                            thisAmount += (each.GetDaysRented() - 3) * 1.5;
-                        break;
-                }
+                var thisAmount = AmountFor(each);
 
                 FrequentRenterPoints++;
 
@@ -66,6 +49,29 @@ namespace videostore
 
 
             return result;
+        }
+
+        private static double AmountFor(Rental each)
+        {
+            double thisAmount = 0;
+            // determines the amount for each line
+            switch (each.GetMovie().GetPriceCode())
+            {
+                case Movie.REGULAR:
+                    thisAmount += 2;
+                    if (each.GetDaysRented() > 2)
+                        thisAmount += (each.GetDaysRented() - 2)*1.5;
+                    break;
+                case Movie.NEW_RELEASE:
+                    thisAmount += each.GetDaysRented()*3;
+                    break;
+                case Movie.CHILDRENS:
+                    thisAmount += 1.5;
+                    if (each.GetDaysRented() > 3)
+                        thisAmount += (each.GetDaysRented() - 3)*1.5;
+                    break;
+            }
+            return thisAmount;
         }
 
 
