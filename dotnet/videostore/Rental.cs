@@ -11,11 +11,6 @@
             this.daysRented = daysRented;
         }
 
-        public Movie GetMovie()
-        {
-            return movie;
-        }
-
         public string GetTitle()
         {
             return movie.GetTitle();
@@ -25,7 +20,7 @@
         {
             double amount = 0;
 
-            switch (GetMovie().GetPriceCode())
+            switch (movie.GetPriceCode())
             {
                 case Movie.REGULAR:
                     amount += 2;
@@ -48,7 +43,7 @@
         {
             var points = 1;
 
-            if (GetMovie().GetPriceCode() == Movie.NEW_RELEASE && daysRented > 1)
+            if (movie.GetPriceCode() == Movie.NEW_RELEASE && daysRented > 1)
                 points++;
             return points;
         }
