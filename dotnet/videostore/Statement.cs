@@ -1,22 +1,30 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace videostore
 {
     class Statement
     {
-        public int FrequentRenterPoints { get; set; }
-        public double AmountOwed { get; set; }
-        protected string Name { get; private set; }
-        private readonly IList<Rental> rentals;
-
         public Statement(String name)
         {
             Name = name;
             rentals = new List<Rental>();
         }
 
+        protected string Name { get; private set; }
+        private readonly IList<Rental> rentals;
+
+        public double AmountOwed
+        {
+            get { return rentals.Sum(rental => rental.AmountFor()); }
+        }
+
+        public int FrequentRenterPoints
+        {
+            get { return rentals.Sum(rental => rental.FrequentRenterPoints()); }
+        }       
+        
         public void AddRental(Rental rental)
         {
             rentals.Add(rental);
@@ -24,20 +32,14 @@ namespace videostore
 
         public String Generate()
         {
-            AmountOwed = 0;
-            FrequentRenterPoints = 0;
-
             var result = "Rental Record for " + Name + "\n";
             
             foreach (var rental in rentals)
             {
+                result += "\t"
+                       + rental.GetMovie().GetTitle() + "\t"
+                       + string.Format("{0:F1}", rental.AmountFor()) + "\n";
 
-                FrequentRenterPoints += FrequentRenterPointsFor(rental);
-
-                result += "\t" 
-                    + rental.GetMovie().GetTitle() + "\t" 
-                    + string.Format("{0:F1}", rental.AmountFor()) + "\n";
-                AmountOwed += rental.AmountFor();
             }
 
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
@@ -45,14 +47,5 @@ namespace videostore
             return result;
         }
 
-        private static int FrequentRenterPointsFor(Rental rental)
-        {
-            var points = 1;
-
-            if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
-                    && rental.GetDaysRented() > 1)
-                points++;
-            return points;
-        }
     }
 }
