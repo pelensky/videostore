@@ -31,7 +31,7 @@ namespace videostore
             
             foreach (var rental in rentals)
             {
-                var thisAmount = Rental.AmountFor(rental);
+                var thisAmount = rental.AmountFor();
 
                 FrequentRenterPoints++;
 
