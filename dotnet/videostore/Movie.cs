@@ -1,9 +1,9 @@
 ﻿namespace videostore
 {
-    public class Movie
+    public abstract class Movie
     {
         public const int CHILDRENS   = 2;
-        public const int REGULAR 	   = 0;
+        public const int REGULAR	   = 0;
         public const int NEW_RELEASE = 1;
 
         private string title;
@@ -26,30 +26,11 @@
             return title;
         }
 
-        public virtual double Price(int daysRented)
-        {
-            var price = 0.0;
-            switch (GetPriceCode())
-            {
-               case NEW_RELEASE:
-                    price += daysRented * 3;
-                    break;
-                case CHILDRENS:
-                    price += 1.5;
-                    if (daysRented > 3)
-                        price += (daysRented - 3)*1.5;
-                    break;
-            }
-            return price;
-        }
+        public abstract double Price(int daysRented);
 
-        public int FrequentRenterPoints(int daysRented)
+        public virtual int FrequentRenterPoints(int daysRented)
         {
-            var points = 1;
-
-            if (GetPriceCode() == NEW_RELEASE && daysRented > 1)
-                points++;
-            return points;
-        }
+            return 1;
+       }
     }
 }

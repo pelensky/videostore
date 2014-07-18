@@ -37,6 +37,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildrensMovie.cs" />
+    <Compile Include="NewReleaseMovie.cs" />
     <Compile Include="RegularMovie.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="Movie.cs" />
