@@ -31,16 +31,16 @@ namespace videostore
             
             foreach (var rental in rentals)
             {
-                var thisAmount = rental.AmountFor();
-
                 FrequentRenterPoints++;
 
                 if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
                         && rental.GetDaysRented() > 1)
                     FrequentRenterPoints++;
 
-                result += "\t" + rental.GetMovie().GetTitle() + "\t" + string.Format("{0:F1}", thisAmount) + "\n";
-                AmountOwed += thisAmount;
+                result += "\t" 
+                    + rental.GetMovie().GetTitle() + "\t" 
+                    + string.Format("{0:F1}", rental.AmountFor()) + "\n";
+                AmountOwed += rental.AmountFor();
             }
 
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
