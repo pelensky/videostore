@@ -16,7 +16,7 @@
         {
             customer.AddRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
 
-            customer.Statement();
+            customer.Generate();
 
             Assert.AreEqual(2, customer.FrequentRenterPoints);
             Assert.AreEqual(9.0, customer.AmountOwed);
@@ -28,7 +28,7 @@
             customer.AddRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
             customer.AddRental(new Rental(new Movie("The Tigger Movie", Movie.NEW_RELEASE), 3));
 
-            customer.Statement();
+            customer.Generate();
 
             Assert.AreEqual(4, customer.FrequentRenterPoints);
             Assert.AreEqual(18.0, customer.AmountOwed);
@@ -39,7 +39,7 @@
         {
             customer.AddRental(new Rental(new Movie("The Tigger Movie", Movie.CHILDRENS), 3));
 
-            customer.Statement();
+            customer.Generate();
 
             Assert.AreEqual(1, customer.FrequentRenterPoints);
             Assert.AreEqual(1.5, customer.AmountOwed);
@@ -52,7 +52,7 @@
             customer.AddRental(new Rental(new Movie("8 1/2", Movie.REGULAR), 2));
             customer.AddRental(new Rental(new Movie("Eraserhead", Movie.REGULAR), 3));
 
-            customer.Statement();
+            customer.Generate();
 
             Assert.AreEqual(3, customer.FrequentRenterPoints);
             Assert.AreEqual(7.5, customer.AmountOwed);
@@ -65,7 +65,7 @@
             customer.AddRental(new Rental(new Movie("8 1/2", Movie.REGULAR), 2));
             customer.AddRental(new Rental(new Movie("Eraserhead", Movie.REGULAR), 3));
 
-            Assert.AreEqual("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", customer.Statement());
+            Assert.AreEqual("Rental Record for Fred\n\tPlan 9 from Outer Space\t2.0\n\t8 1/2\t2.0\n\tEraserhead\t3.5\nYou owed 7.5\nYou earned 3 frequent renter points\n", customer.Generate());
         }
 
         private Customer customer;

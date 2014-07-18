@@ -24,7 +24,7 @@ namespace videostore
             return name;
         }
 
-        public String Statement()
+        public String Generate()
         {
             AmountOwed = 0;
             FrequentRenterPoints = 0;
