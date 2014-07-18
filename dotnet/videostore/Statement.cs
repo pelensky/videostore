@@ -3,12 +3,12 @@ using System.Collections;
 
 namespace videostore
 {
-    class Customer
+    class Statement
     {
         public int FrequentRenterPoints { get; set; }
         public double AmountOwed { get; set; }
 
-        public Customer(String name)
+        public Statement(String name)
         {
             this.name = name;
         }
