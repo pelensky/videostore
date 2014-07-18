@@ -18,8 +18,6 @@
         {
             statement.AddRental(new Rental(CreateNewRelease(), 3));
 
-            statement.Generate();
-
             Assert.AreEqual(2, statement.FrequentRenterPoints);
             Assert.AreEqual(9.0, statement.AmountOwed);
         }
@@ -30,8 +28,6 @@
             statement.AddRental(new Rental(CreateNewRelease(), 3));
             statement.AddRental(new Rental(CreateNewRelease(), 3));
 
-            statement.Generate();
-
             Assert.AreEqual(4, statement.FrequentRenterPoints);
             Assert.AreEqual(18.0, statement.AmountOwed);
         }
@@ -40,8 +36,6 @@
         public void TestSingleChildrensStatement()
         {
             statement.AddRental(new Rental(CreateChildrensMovie(), 3));
-
-            statement.Generate();
 
             Assert.AreEqual(1, statement.FrequentRenterPoints);
             Assert.AreEqual(1.5, statement.AmountOwed);
@@ -53,8 +47,6 @@
             statement.AddRental(new Rental(CreateRegularMovie(), 1));
             statement.AddRental(new Rental(CreateRegularMovie(), 2));
             statement.AddRental(new Rental(CreateRegularMovie(), 3));
-
-            statement.Generate();
 
             Assert.AreEqual(3, statement.FrequentRenterPoints);
             Assert.AreEqual(7.5, statement.AmountOwed);
