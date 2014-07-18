@@ -69,17 +69,17 @@
 
         private static Movie CreateNewRelease()
         {
-            return new NewReleaseMovie("New Release", Movie.NEW_RELEASE);
+            return new NewReleaseMovie("New Release");
         }
 
         private static Movie CreateChildrensMovie()
         {
-            return new ChildrensMovie("Childrens Movie", Movie.CHILDRENS);
+            return new ChildrensMovie("Childrens Movie");
         }
 
         private static Movie CreateRegularMovie(string name = "Regular Movie")
         {
-            return new RegularMovie(name, Movie.REGULAR);
+            return new RegularMovie(name);
         }
     }
 }
