@@ -11,7 +11,7 @@
 
         public Movie (string title, int priceCode) {
             this.title 		= title;
-            this.priceCode 	= priceCode;
+            SetPriceCode(priceCode);
         }
 
         public int GetPriceCode () {
@@ -28,24 +28,33 @@
 
         public double Price(int daysRented)
         {
-            var amount = 0.0;
+            var price = 0.0;
             switch (GetPriceCode())
             {
-                case Movie.REGULAR:
-                    amount += 2;
+                case REGULAR:
+                    price += 2;
                     if (daysRented > 2)
-                        amount += (daysRented - 2) * 1.5;
+                        price += (daysRented - 2) * 1.5;
                     break;
-                case Movie.NEW_RELEASE:
-                    amount += daysRented * 3;
+                case NEW_RELEASE:
+                    price += daysRented * 3;
                     break;
-                case Movie.CHILDRENS:
-                    amount += 1.5;
+                case CHILDRENS:
+                    price += 1.5;
                     if (daysRented > 3)
-                        amount += (daysRented - 3)*1.5;
+                        price += (daysRented - 3)*1.5;
                     break;
             }
-            return amount;
+            return price;
+        }
+
+        public int FrequentRenterPoints(int daysRented)
+        {
+            var points = 1;
+
+            if (GetPriceCode() == NEW_RELEASE && daysRented > 1)
+                points++;
+            return points;
         }
     }
 }

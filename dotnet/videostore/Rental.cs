@@ -23,11 +23,8 @@
 
         public int FrequentRenterPoints()
         {
-            var points = 1;
+            return movie.FrequentRenterPoints(daysRented);
 
-            if (movie.GetPriceCode() == Movie.NEW_RELEASE && daysRented > 1)
-                points++;
-            return points;
         }
     }
 }
