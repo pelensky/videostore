@@ -17,7 +17,7 @@ namespace videostore
 
         public double AmountOwed
         {
-            get { return rentals.Sum(rental => rental.AmountFor()); }
+            get { return rentals.Sum(rental => rental.Price()); }
         }
 
         public int FrequentRenterPoints
@@ -38,7 +38,7 @@ namespace videostore
             {
                 result += "\t"
                        + rental.GetTitle() + "\t"
-                       + string.Format("{0:F1}", rental.AmountFor()) + "\n";
+                       + string.Format("{0:F1}", rental.Price()) + "\n";
             }
 
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
