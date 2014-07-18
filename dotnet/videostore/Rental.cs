@@ -2,18 +2,13 @@
 {
     class Rental
     {
-        private Movie movie;
-        private int daysRented;
+        private readonly Movie movie;
+        private readonly int daysRented;
 
         public Rental(Movie movie, int daysRented)
         {
             this.movie = movie;
             this.daysRented = daysRented;
-        }
-
-        public int GetDaysRented()
-        {
-            return daysRented;
         }
 
         public Movie GetMovie()
@@ -34,16 +29,16 @@
             {
                 case Movie.REGULAR:
                     amount += 2;
-                    if (GetDaysRented() > 2)
-                        amount += (GetDaysRented() - 2)*1.5;
+                    if (daysRented > 2)
+                        amount += (daysRented - 2)*1.5;
                     break;
                 case Movie.NEW_RELEASE:
-                    amount += GetDaysRented()*3;
+                    amount += daysRented*3;
                     break;
                 case Movie.CHILDRENS:
                     amount += 1.5;
-                    if (GetDaysRented() > 3)
-                        amount += (GetDaysRented() - 3)*1.5;
+                    if (daysRented > 3)
+                        amount += (daysRented - 3)*1.5;
                     break;
             }
             return amount;
@@ -53,7 +48,7 @@
         {
             var points = 1;
 
-            if (GetMovie().GetPriceCode() == Movie.NEW_RELEASE && GetDaysRented() > 1)
+            if (GetMovie().GetPriceCode() == Movie.NEW_RELEASE && daysRented > 1)
                 points++;
             return points;
         }
