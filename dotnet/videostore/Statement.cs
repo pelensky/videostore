@@ -7,21 +7,16 @@ namespace videostore
     {
         public int FrequentRenterPoints { get; set; }
         public double AmountOwed { get; set; }
+        protected string Name { get; private set; }
 
         public Statement(String name)
         {
-            this.name = name;
+            Name = name;
         }
-
 
         public void AddRental(Rental rental)
         {
             rentals.Add(rental);
-        }
-
-        public String GetName()
-        {
-            return name;
         }
 
         public String Generate()
@@ -29,8 +24,8 @@ namespace videostore
             AmountOwed = 0;
             FrequentRenterPoints = 0;
 
-            IEnumerator rentalsEnumerator = this.rentals.GetEnumerator();
-            String result = "Rental Record for " + GetName() + "\n";
+            var rentalsEnumerator = rentals.GetEnumerator();
+            var result = "Rental Record for " + Name + "\n";
 
             while (rentalsEnumerator.MoveNext())
             {
@@ -74,7 +69,6 @@ namespace videostore
         }
 
 
-        private String name;
         private ArrayList rentals = new ArrayList();
     }
 }
