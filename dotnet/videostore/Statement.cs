@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace videostore
 {
@@ -8,10 +9,12 @@ namespace videostore
         public int FrequentRenterPoints { get; set; }
         public double AmountOwed { get; set; }
         protected string Name { get; private set; }
+        private readonly IList<Rental> rentals;
 
         public Statement(String name)
         {
             Name = name;
+            rentals = new List<Rental>();
         }
 
         public void AddRental(Rental rental)
@@ -24,30 +27,24 @@ namespace videostore
             AmountOwed = 0;
             FrequentRenterPoints = 0;
 
-            var rentalsEnumerator = rentals.GetEnumerator();
             var result = "Rental Record for " + Name + "\n";
-
-            while (rentalsEnumerator.MoveNext())
+            
+            foreach (var rental in rentals)
             {
-                var each = (Rental) rentalsEnumerator.Current;
-
-                var thisAmount = AmountFor(each);
+                var thisAmount = AmountFor(rental);
 
                 FrequentRenterPoints++;
 
-                if (each.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
-                        && each.GetDaysRented() > 1)
+                if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
+                        && rental.GetDaysRented() > 1)
                     FrequentRenterPoints++;
 
-                result += "\t" + each.GetMovie().GetTitle() + "\t" + string.Format("{0:F1}", thisAmount) + "\n";
+                result += "\t" + rental.GetMovie().GetTitle() + "\t" + string.Format("{0:F1}", thisAmount) + "\n";
                 AmountOwed += thisAmount;
-
             }
 
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
             result += "You earned " + FrequentRenterPoints + " frequent renter points\n";
-
-
             return result;
         }
 
@@ -75,6 +72,5 @@ namespace videostore
         }
 
 
-        private ArrayList rentals = new ArrayList();
     }
 }
