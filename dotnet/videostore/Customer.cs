@@ -5,10 +5,14 @@ namespace videostore
 {
     class Customer
     {
+        public int FrequentRenterPoints { get; set; }
+        public double AmountOwed { get; set; }
+
         public Customer(String name)
         {
             this.name = name;
         }
+
 
         public void AddRental(Rental rental)
         {
@@ -22,8 +26,8 @@ namespace videostore
 
         public String Statement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
+            AmountOwed = 0;
+            FrequentRenterPoints = 0;
 
             IEnumerator rentalsEnumerator = this.rentals.GetEnumerator();
             String result = "Rental Record for " + GetName() + "\n";
@@ -51,19 +55,19 @@ namespace videostore
                         break;
                 }
 
-                frequentRenterPoints++;
+                FrequentRenterPoints++;
 
                 if (each.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
                         && each.GetDaysRented() > 1)
-                    frequentRenterPoints++;
+                    FrequentRenterPoints++;
 
                 result += "\t" + each.GetMovie().GetTitle() + "\t" + string.Format("{0:F1}", thisAmount) + "\n";
-                totalAmount += thisAmount;
+                AmountOwed += thisAmount;
 
             }
 
-            result += "You owed " + string.Format("{0:F1}", totalAmount) + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points\n";
+            result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
+            result += "You earned " + FrequentRenterPoints + " frequent renter points\n";
 
 
             return result;
