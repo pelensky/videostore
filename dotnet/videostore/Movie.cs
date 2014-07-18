@@ -2,13 +2,10 @@
 {
     public abstract class Movie
     {
-        private string title;
+        public string Title { get; protected set; }
 
         public Movie (string title) {
-            this.title 		= title;
-        }
-        public string GetTitle () {
-            return title;
+            Title = title;
         }
         public abstract double Price(int daysRented);
 

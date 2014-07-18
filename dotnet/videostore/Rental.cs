@@ -13,7 +13,7 @@
 
         public string GetTitle()
         {
-            return movie.GetTitle();
+            return movie.Title;
         }
 
         public double Price()
