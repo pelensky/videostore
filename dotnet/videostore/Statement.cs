@@ -31,11 +31,8 @@ namespace videostore
             
             foreach (var rental in rentals)
             {
-                FrequentRenterPoints++;
 
-                if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
-                        && rental.GetDaysRented() > 1)
-                    FrequentRenterPoints++;
+                FrequentRenterPoints += FrequentRenterPointsFor(rental);
 
                 result += "\t" 
                     + rental.GetMovie().GetTitle() + "\t" 
@@ -46,6 +43,16 @@ namespace videostore
             result += "You owed " + string.Format("{0:F1}", AmountOwed) + "\n";
             result += "You earned " + FrequentRenterPoints + " frequent renter points\n";
             return result;
+        }
+
+        private static int FrequentRenterPointsFor(Rental rental)
+        {
+            var points = 1;
+
+            if (rental.GetMovie().GetPriceCode() == Movie.NEW_RELEASE
+                    && rental.GetDaysRented() > 1)
+                points++;
+            return points;
         }
     }
 }
